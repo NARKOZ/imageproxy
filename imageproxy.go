@@ -111,7 +111,8 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.URL.Path == "/" || r.URL.Path == "/health-check" {
-		fmt.Fprint(w, "OK")
+		w.WriteHeader(http.StatusGone)
+		w.Write([]byte("410 GONE"))
 		return
 	}
 
